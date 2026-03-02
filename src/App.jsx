@@ -9,14 +9,23 @@ import { TodoInput } from './components/TodoInput'
 import { Footer } from './components/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState([
+    { input: 'Hello! Add your first todo!', complete: true }
+  ])
+
+  const [selectedTab, setSelectedTab] = useState('Open')
 
   return (
     <>
-      <Header />
-      <Tabs />
-      <TodoList />
-      <TodoInput />
+      <Header todos={todos} />
+      <div className="card">
+        <Tabs
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+          todos={todos} />
+        <TodoList />
+        <TodoInput />
+      </div>
       <Footer />
     </>
   )

@@ -4,7 +4,7 @@ export function Header(props) {
     const todosLength = openTodos.length
     const isTasksPlural = todosLength != 1
     const taskOrTasks = isTasksPlural ? 'tasks' : 'task'
-    
+
     return (
         <header>
             <div className="header-container">
@@ -22,4 +22,4 @@ export function Header(props) {
             </div>
         </header>
     )
-    }
+}

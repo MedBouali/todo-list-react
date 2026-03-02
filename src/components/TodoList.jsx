@@ -1,3 +1,5 @@
+import { TodoCard } from "./TodoCard";
+
 export function TodoList(props) {
     const { todos, selectedTab } = props
     const filterTodosList = selectedTab === 'All' ?

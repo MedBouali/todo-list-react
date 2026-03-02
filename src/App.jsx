@@ -1,12 +1,9 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Header } from './components/Header'
-import { Tabs } from './components/Tabs'
-import { TodoList } from './components/TodoList'
-import { TodoInput } from './components/TodoInput'
-import { Footer } from './components/Footer'
+import { Header } from "./components/Header"
+import { Tabs } from "./components/Tabs"
+import { TodoInput } from "./components/TodoInput"
+import { TodoList } from "./components/TodoList"
+import { useState, useEffect } from 'react'
+import { Footer } from "./components/Footer"
 
 function App() {
   const [todos, setTodos] = useState([
@@ -37,6 +34,18 @@ function App() {
     setTodos(newTodoList)
     handleSaveData(newTodoList)
   }
+
+  function handleSaveData(currentTodos) {
+    localStorage.setItem('todo-app', JSON.stringify({ todos: currentTodos }))
+  }
+
+  useEffect(() => {
+    if (!localStorage || !localStorage.getItem('todo-app')) {
+      return
+    }
+    let db = JSON.parse(localStorage.getItem('todo-app'))
+    setTodos(db.todos)
+  }, [])
 
   return (
     <>

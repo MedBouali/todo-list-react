@@ -1,4 +1,10 @@
 export function Header(props) {
+    const { todos } = props
+    const openTodos = todos.filter(val => !val.complete)
+    const todosLength = openTodos.length
+    const isTasksPlural = todosLength != 1
+    const taskOrTasks = isTasksPlural ? 'tasks' : 'task'
+    
     return (
         <header>
             <div className="header-container">

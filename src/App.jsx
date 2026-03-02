@@ -15,6 +15,29 @@ function App() {
 
   const [selectedTab, setSelectedTab] = useState('Open')
 
+  function handleAddTodo(newTodo) {
+    const newTodoList = [...todos, { input: newTodo, complete: false }]
+    setTodos(newTodoList)
+    handleSaveData(newTodoList)
+  }
+
+  function handleCompleteTodo(index) {
+    const newTodoList = [...todos]
+    let completedTodo = todos[index]
+    completedTodo['complete'] = true
+    newTodoList[index] = completedTodo
+    setTodos(newTodoList)
+    handleSaveData(newTodoList)
+  }
+
+  function handleDeleteTodo(index) {
+    const newTodoList = todos.filter((val, valIndex) => {
+      return valIndex !== index
+    })
+    setTodos(newTodoList)
+    handleSaveData(newTodoList)
+  }
+
   return (
     <>
       <Header todos={todos} />
@@ -23,8 +46,12 @@ function App() {
           selectedTab={selectedTab}
           setSelectedTab={setSelectedTab}
           todos={todos} />
-        <TodoList />
-        <TodoInput />
+        <TodoList
+          handleCompleteTodo={handleCompleteTodo}
+          handleDeleteTodo={handleDeleteTodo}
+          todos={todos}
+          selectedTab={selectedTab} />
+        <TodoInput handleAddTodo={handleAddTodo} />
       </div>
       <Footer />
     </>
